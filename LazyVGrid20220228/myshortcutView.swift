@@ -7,18 +7,32 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct myshortcutView: View {
     var vGridItem: [GridItem] = Array(repeating: .init(.adaptive(minimum: 120)), count: 2)
-    @State var string = ""
+    @State var shortcutString = ""
     var body: some View {
         NavigationView {
             VStack {
                 ScrollView {
-                    TextField("検索", text: $string)
-                        .padding(.horizontal)
-                        .padding(.bottom, 4)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(Color.gray)
+                        TextField("検索", text: $shortcutString, onEditingChanged: { isBegin in
+                            if isBegin {
+                                
+                            } else {
+                                
+                            }
+                        }, onCommit: {
+                            
+                        })
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                    .padding(.horizontal, 2)
+                    .padding(.bottom, 8)
                     
                     LazyVGrid(columns: vGridItem) {
                         ForEach((1...15), id: \.self) { id in
@@ -69,17 +83,17 @@ struct ContentView: View {
                 }
             }
             .padding(.horizontal, 8.0)
-            .navigationTitle("LazyVGrid")
+            .navigationTitle("すべてのショートカット")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         
                     } label: {
                         Text("戻る")
-                            
+                        
                     }
                     .padding(.top, 4.0)
-
+                    
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -89,7 +103,7 @@ struct ContentView: View {
                         Text("選択")
                             .padding(.top, 5.0)
                     }
-
+                    
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -100,15 +114,16 @@ struct ContentView: View {
                             .font(.largeTitle)
                             .fontWeight(.light)
                     }
-
+                    
                 }
             }
+            
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        myshortcutView()
     }
 }
